@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Gallery Pagination</title>
+</head>
+
+<body class="text-gray-400 bg-gray-900 text-white body-font">
+  <div>
+    <h1 class="text-3xl font-bold text-center">
+      Gallery Pagination
+    </h1>
+
+    <!-- Container to fill a form with title, and description -->
+    <form id="form">
+      <div class="mb-6">
+        <label for="title" class="block mb-2 text-sm font-medium  dark:text-gray-300">Title</label>
+        <input type="text" id="title"
+          class="text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="My best image" required>
+      </div>
+      <div class="mb-6">
+        <label for="description" class="block mb-2 text-sm font-medium  dark:text-gray-300">Description</label>
+        <textarea id="description"
+          class="text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="This is my best image" required></textarea>
+      </div>
+      <div class="mb-6">
+        <label class="block mb-2 text-sm font-medium  dark:text-gray-300">Image</label>
+        <div class="flex">
+          <select id="category"
+            class="w-1/5 text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="url">URL</option>
+            <option value="file">File</option>
+          </select>
+          <input type="text" id="image-url"
+            class="ml-5 text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="https://www.example.com/image.jpg" required>
+          <input type="file" id="image-file"
+            class="hidden ml-5 text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+      </div>
+
+      <button type="submit" id="btn-submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+  </div>
+
+  <div class="gallery">
+  </div>
+
+  <script type="module" src="assets/js/scripts.js"></script>
+</body>
+
+</html>
