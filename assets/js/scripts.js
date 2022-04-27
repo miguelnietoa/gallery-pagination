@@ -47,10 +47,17 @@ document.getElementById("form").addEventListener("submit", async (e) => {
 
 // Show images saved in local storage on page load
 const imageList = JSON.parse(localStorage.getItem("gallery.imageList")) || [];
-document.querySelector(".gallery").innerHTML = imageList.map(imageItem => {
+document.querySelector("#gallery").innerHTML = imageList.map(imageItem => {
   return `
-    <div class="image-container">
-      <img src="${imageItem.image.data}" alt="${imageItem.title}">
+    <img
+      src="${imageItem.image.data}"
+      alt="${imageItem.title}"
+      class="object-fill w-full h-full rounded"
+      data-tooltip-target="tooltip-light" data-tooltip-style="light"
+    >
+    <div id="tooltip-light" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 shadow-sm opacity-0 tooltip">
+      ${imageItem.title}
+      <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
     `;
 }).join("");
