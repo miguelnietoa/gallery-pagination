@@ -41,7 +41,7 @@
           <input type="text" id="image-url"
             class="ml-5 text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="https://www.example.com/image.jpg" required>
-          <input type="file" id="image-file"
+          <input type="file" id="image-file" accept="image/*"
             class="hidden ml-5 text-black bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
       </div>
@@ -51,7 +51,26 @@
     </form>
   </div>
 
-  <div id="gallery" class="container my-10 grid grid-cols-4 gap-4">
+  <!-- Pagination controls -->
+  <div id="pagination-controls" class="flex items-center justify-center space-x-1 pt-12">
+    <a href="#" id="btn-prev" class="px-4 py-2 text-gray-500 bg-gray-300 rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+      </svg>
+    </a>
+
+    <div id="btns-pages" class="flex items-center space-x-1">
+      <!-- Buttons for each page -->
+    </div>
+
+    <a href="#" id="btn-next" class="px-4 py-2 text-gray-500 bg-gray-300 rounded-md">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
+    </a>
+  </div>
+
+  <div id="gallery" class="container py-4 grid grid-cols-4 gap-4">
     <!-- Gallery items -->
   </div>
 

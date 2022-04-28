@@ -1,4 +1,4 @@
-import { toBase64 } from './utils.js';
+import { toBase64, paginate } from './utils.js';
 
 // Get the state of dropdown to decide what input to show
 document.getElementById("category").addEventListener("change", (e) => {
@@ -45,19 +45,62 @@ document.getElementById("form").addEventListener("submit", async (e) => {
 
 });
 
-// Show images saved in local storage on page load
+// Get page from query string with multiple parameters
+const currentPage = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
+
+const PAGE_SIZE = 12;
 const imageList = JSON.parse(localStorage.getItem("gallery.imageList")) || [];
-document.querySelector("#gallery").innerHTML = imageList.map(imageItem => {
-  return `
-    <img
-      src="${imageItem.image.data}"
-      alt="${imageItem.title}"
-      class="object-fill w-full h-full rounded"
-      data-tooltip-target="tooltip-light" data-tooltip-style="light"
-    >
-    <div id="tooltip-light" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 shadow-sm opacity-0 tooltip">
-      ${imageItem.title}
-      <div class="tooltip-arrow" data-popper-arrow></div>
-    </div>
-    `;
-}).join("");
+const imagesToShow = paginate(imageList, currentPage, PAGE_SIZE);
+const numPages = Math.ceil(imageList.length / PAGE_SIZE);
+
+if (imageList.length === 0) {
+  document.getElementById("pagination-controls").classList.add("hidden");
+}
+
+// Render buttons for pagination
+document.querySelector("#btns-pages").innerHTML = [...Array(numPages)].map((_, i) =>
+  `
+  <a id="btn-${i + 1}" href="/?page=${i + 1}" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white">
+    ${i + 1}
+  </a>
+  `
+).join("");
+
+// Set href of prev and next buttons
+const enableButtonClasses = " hover:bg-blue-400 hover:text-white";
+if (currentPage === 1) {
+  document.getElementById("btn-prev").removeAttribute("href");
+  document.getElementById("btn-prev").className.replace(enableButtonClasses, "");
+} else {
+  document.getElementById("btn-prev").setAttribute("href", `/?page=${currentPage - 1}`);
+  document.getElementById("btn-prev").className += enableButtonClasses;
+}
+
+if (currentPage === numPages) {
+  document.getElementById("btn-next").removeAttribute("href");
+  document.getElementById("btn-next").className.replace(enableButtonClasses, "");
+} else {
+  document.getElementById("btn-next").setAttribute("href", `/?page=${currentPage + 1}`);
+  document.getElementById("btn-next").className += enableButtonClasses;
+}
+
+
+const renderImages = (imagesToShow) => {
+  document.querySelector("#gallery").innerHTML = imagesToShow.map(imageItem => {
+    return `
+      <img
+        src="${imageItem.image.data}"
+        alt="${imageItem.title}"
+        class="object-fill w-full h-full rounded"
+        data-tooltip-target="tooltip-light" data-tooltip-style="light"
+      >
+      <div id="tooltip-light" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 shadow-sm opacity-0 tooltip">
+        <h6 class="font-bold">${imageItem.title}</h6>
+        ${imageItem.description}
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+      `;
+  }).join("");
+};
+
+renderImages(imagesToShow);
