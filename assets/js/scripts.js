@@ -68,7 +68,7 @@ if (imageList.length === 0) {
 // Render buttons for pagination
 document.querySelector("#btns-pages").innerHTML = [...Array(numPages)].map((_, i) =>
   `
-  <a id="btn-${i + 1}" href="/?page=${i + 1}" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white">
+  <a id="btn-${i + 1}" href="?page=${i + 1}" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-blue-400 hover:text-white">
     ${i + 1}
   </a>
   `
