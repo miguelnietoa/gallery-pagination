@@ -45,13 +45,21 @@ document.getElementById("form").addEventListener("submit", async (e) => {
 
 });
 
-// Get page from query string with multiple parameters
-const currentPage = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
-
 const PAGE_SIZE = 12;
 const imageList = JSON.parse(localStorage.getItem("gallery.imageList")) || [];
-const imagesToShow = paginate(imageList, currentPage, PAGE_SIZE);
 const numPages = Math.ceil(imageList.length / PAGE_SIZE);
+
+
+
+const url = new URL(window.location);
+let currentPage = parseInt(url.searchParams.get("page"));
+if (!currentPage || currentPage < 1 || currentPage > numPages) {
+  currentPage = 1;
+  url.searchParams.set("page", currentPage);
+  window.history.pushState({}, "", url.toString());
+}
+
+const imagesToShow = paginate(imageList, currentPage, PAGE_SIZE);
 
 if (imageList.length === 0) {
   document.getElementById("pagination-controls").classList.add("hidden");
