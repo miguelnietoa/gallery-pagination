@@ -80,7 +80,7 @@ if (currentPage === 1) {
   document.getElementById("btn-prev").removeAttribute("href");
   document.getElementById("btn-prev").className.replace(enableButtonClasses, "");
 } else {
-  document.getElementById("btn-prev").setAttribute("href", `/?page=${currentPage - 1}`);
+  document.getElementById("btn-prev").setAttribute("href", `?page=${currentPage - 1}`);
   document.getElementById("btn-prev").className += enableButtonClasses;
 }
 
@@ -88,7 +88,7 @@ if (currentPage === numPages) {
   document.getElementById("btn-next").removeAttribute("href");
   document.getElementById("btn-next").className.replace(enableButtonClasses, "");
 } else {
-  document.getElementById("btn-next").setAttribute("href", `/?page=${currentPage + 1}`);
+  document.getElementById("btn-next").setAttribute("href", `?page=${currentPage + 1}`);
   document.getElementById("btn-next").className += enableButtonClasses;
 }
 
